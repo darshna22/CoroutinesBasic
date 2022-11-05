@@ -23,11 +23,11 @@ __eg:__
 __// two kotlin suspend functions
 // Suppose we have two tasks like below__
 
-private suspend fun doTaskOne(): String
+```private suspend fun doTaskOne(): String
 {
 delay(2000)
 return "One"
-}
+}```
 
 private suspend fun doTaskTwo(): String
 {
