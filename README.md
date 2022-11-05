@@ -23,56 +23,53 @@ __eg:__
 __// two kotlin suspend functions
 // Suppose we have two tasks like below__
 
-```private suspend fun doTaskOne(): String
-{
-delay(2000)
+```
+private suspend fun doTaskOne(): String{
+ delay(2000)
 return "One"
-}```
+}
+```
 
-private suspend fun doTaskTwo(): String
-{
-delay(2000)
+```
+private suspend fun doTaskTwo(): String{
+  delay(2000)
 return "Two"
 }
-
+```
  
 
 __// kotlin function using async__
-fun startLongRunningTaskInParallel() 
-{
-  viewModelScope.launch 
-  {
+```
+fun startLongRunningTaskInParallel() {
+  viewModelScope.launch {
     val resultOneDeferred = async { TaskOne() }
     val resultTwoDeferred = async { TaskTwo() }
     val combinedResult = resultOneDeferred.await() + resultTwoDeferred.await()
   }
 }
+```
 
 __// kotlin function using withContext__
-fun startLongRunningTaskInParallel()
-{
-viewModelScope.launch
-{
+```
+fun startLongRunningTaskInParallel(){
+  viewModelScope.launch{
 	val resultOne = withContext(Dispatchers.IO) { TaskOne() }
 	val resultTwo = withContext(Dispatchers.IO) { TaskTwo() }
 	val combinedResult = resultOne + resultTwo
+  }
 }
-}
-
+```
    
 ## withContext(Dispatchers.Default) 
 which context also used to switch threads means when we perform task on background or on some other thread and wants to udpdate UI on main thread
 __eg:__
+```
 private var _data=MutableLiveData<Int>()
-_data.value= withContext(Dispatchers.IO)
-{
-getData()
- Log.i(
- TAG,
- "runCoroutine: " + Thread.currentThread().name
-)// DefaultDispatcher-worker-1
+_data.value= withContext(Dispatchers.IO){
+   getData()
+    Log.i( TAG,"runCoroutine: " + Thread.currentThread().name)// DefaultDispatcher-worker-1
  }
- 
+``` 
  __Note:__ By default coroutine runs on main thread if you want to perform task on diff thread we can use withContext with below Dispatchers 
 * Dispatchers.IO //works on DefaultDispatcher-worker-1 Thread 
 * Dispatchers.Main //works on Main Thread 
