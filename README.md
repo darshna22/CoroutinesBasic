@@ -10,14 +10,14 @@
 * launch : Can we use to execute any operation synchronously
 * Async  : Can we use to execute any operation aSynchronously
 Points to remembr:
-o It is known that async and launch are the two ways to start the coroutine. 
-o Since It is known that async is used to get the result back, & should be used only when we need the parallel execution,
-o whereas the launch is used when we do not want to get the result back and is used for the operation such as updating of data, etc.
-o As we know that async is the only way till now to start the coroutine and get the result back, but the problem with async arises when we do not want to make parallel network calls.
-o It is known when async is used, one needs to use the await() function, which leads to blocking of the main thread, 
-o but here comes the concept of withContext which removes the problem of blocking the main thread.
-o withContext is nothing but another way of writing the async where one does not have to write await(). 
-o When withContext, is used, it runs the tasks in series instead of parallel. So one should remember that when we have a single task in the background and want to get back the result of that task, we should use withContext
+* It is known that async and launch are the two ways to start the coroutine. 
+* Since It is known that async is used to get the result back, & should be used only when we need the parallel execution,
+* whereas the launch is used when we do not want to get the result back and is used for the operation such as updating of data, etc.
+* As we know that async is the only way till now to start the coroutine and get the result back, but the problem with async arises when we do not want to make parallel network calls.
+* It is known when async is used, one needs to use the await() function, which leads to blocking of the main thread, 
+* but here comes the concept of withContext which removes the problem of blocking the main thread.
+* withContext is nothing but another way of writing the async where one does not have to write await(). 
+* When withContext, is used, it runs the tasks in series instead of parallel. So one should remember that when we have a single task in the background and want to get back the result of that task, we should use withContext
 
 eg:
 // two kotlin suspend functions
@@ -74,14 +74,14 @@ getData()
  }
  
  Note: By default coroutine runs on main thread if you want to perform task on diff thread we can use withContext with below Dispatchers 
-o Dispatchers.IO //works on DefaultDispatcher-worker-1 Thread 
-o Dispatchers.Main //works on Main Thread 
-o Dispatchers.Default //works on DefaultDispatcher-worker-1 Thread 
-o Dispatchers.Unconfined //works on kotlinx.coroutines.DefaultExecutor Thread 
+* Dispatchers.IO //works on DefaultDispatcher-worker-1 Thread 
+* Dispatchers.Main //works on Main Thread 
+* Dispatchers.Default //works on DefaultDispatcher-worker-1 Thread 
+* Dispatchers.Unconfined //works on kotlinx.coroutines.DefaultExecutor Thread 
 
 ## Exception Handling in coroutines
-o try-catch
-o CoroutineExceptionHandler
+* try-catch
+* CoroutineExceptionHandler
 
 
 
